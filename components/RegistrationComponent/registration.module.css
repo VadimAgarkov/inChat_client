@@ -1,0 +1,16 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  padding: 40px 16px 16px 16px;
+  background-color: rgb(26,26,26);
+}
+
+.form{
+  margin-top: 32px;
+  width: 100%;
+}
+
+

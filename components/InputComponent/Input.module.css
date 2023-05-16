@@ -1,0 +1,45 @@
+.inputWrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 44px;
+  margin-top: 14px;
+  background: #262626;
+  border-radius: 26px;
+}
+
+.input {
+  width: 80%;
+  height: 20px;
+  border: none;
+  color: #FFFFFF;
+  background: #262626;
+  font-family: 'AvantGardeGothicCTT';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 14px;
+  display: flex;
+  align-items: flex-end;
+  /* flex: none; */
+  order: 1;
+  flex-grow: 0;
+}
+
+.input::-ms-reveal {
+  filter: invert(100%);
+}
+
+.input::-ms-fill{
+  background-color: #262626;
+}
+
+.input:focus {
+  outline: none;
+  background-color: #262626;
+}
+
+.inputWrapper:hover {
+  border: 1px solid #817CFF;
+}

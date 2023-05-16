@@ -1,0 +1,59 @@
+.header{
+  background: #1A1A1A;
+  color: #817CFF;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-top: 15px;
+  position:fixed;
+	width: 100%;
+  height: 55px;
+}
+
+.btn{
+  margin: 10px;
+  background-color: rgba(240, 248, 255, 0);
+  border: none;
+  text-align: center;
+  font-family: 'Lack';
+  font-style: normal;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.settingList{
+  border-top: 1.5px solid #817CFF; 
+  background-color: rgb(37, 36, 35);
+  border-radius: 26px 26px 0px 0px;
+  background-color: #1F1F1F;
+  margin-top: 65px;
+  padding-top: 15px;
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto !important;
+  position: fixed;
+}
+
+/* .group{
+  width: 128px;
+  height: 44px;
+  border: 1.5px solid #817CFF;
+  border-radius: 22px;
+  text-align: center;
+  padding: auto;
+  margin: 4px;
+} */
+
+.btnGroup{
+  width: 128px;
+  height: 44px;
+  color: #817CFF;
+  background-color: #262626;
+  border: 1.5px solid #817CFF;
+  border-radius: 22px;
+  align-items: center;
+  padding: auto;
+  margin: 4px;
+}

@@ -1,0 +1,14 @@
+.main {
+  border-top: 1.5px solid #817CFF; 
+  background-color: #1F1F1F;
+  border-radius: 26px 26px 0px 0px;
+  margin-top: 65px;
+  padding-top: 15px;
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto !important;
+  position: fixed;
+};
+
+
+

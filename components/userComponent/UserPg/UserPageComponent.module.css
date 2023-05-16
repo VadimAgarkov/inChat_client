@@ -1,0 +1,29 @@
+.basic {
+  border-top: 1.5px solid #817CFF;
+  border-radius: 26px 26px 0px 0px;
+  padding-top: 10px;
+  background-color: #1f1f1f;
+  align-items: center;
+  height: 100vh;
+}
+
+.hiden {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 8px;
+}
+
+.option_btn {
+  border: none;
+  background-color: #37363500;
+  color: #817CFF;
+  margin: 5px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 16px;
+}

@@ -1,0 +1,20 @@
+.field_wrapper{
+  height: 44px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px 10px 10px;
+  background-color: rgba(37, 36, 35, 0);
+}
+
+.field_icon{
+  margin-right: 10px; /* отступ между Image и текстом */
+}
+
+.field_value{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
+}
