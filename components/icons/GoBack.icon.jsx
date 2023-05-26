@@ -6,6 +6,3 @@ const GoBackIcon = ({ width, height, color }) => {
   );
 };
 export default GoBackIcon;
-
-
-

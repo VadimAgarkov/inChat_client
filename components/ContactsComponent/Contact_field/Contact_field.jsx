@@ -18,7 +18,7 @@ const ContactField = (props) => {
   };
   const Message = async () => {
     const checkCookie = getCookie('access_token');
-    const res = await Requests.Authentication('/chats/add_chat', { user_1: checkCookie, subscriber: id });
+    const res = await Requests.authenticate('/chats/add_chat', { user_1: checkCookie, subscriber: id });
     router.push(`/chats/${res.data.chat.id}`);
   };
   const CheckAvatar = (imageSrc) => {

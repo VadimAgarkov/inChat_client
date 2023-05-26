@@ -1,17 +1,23 @@
-import Image from 'next/image';
 import css from './ChatHeaderComponent.module.css';
+
+import Image from 'next/image';
 import { useRouter } from 'next/router';
+
 import AvatarIcon from '../../../icons/Avatar.icon';
 import GoBackIcon from '../../../icons/GoBack.icon';
 import PhoneIcon from '../../../icons/Phone.icon';
 import SearchIcon from '../../../icons/Search.icon';
 
+
+
 const ChatHeaderComponent = (props) => {
   const { Avatar, UserName, State, Phone } = props;
   const router = useRouter();
-  const GoBack = () => {
+
+  const GoBack = () => { 
     router.back()
   };
+
   const CheckAvatar = (Avatar) => {
     if (Avatar) {
       <Image
@@ -26,7 +32,7 @@ const ChatHeaderComponent = (props) => {
     }
   };
   const Call = () => {
-    console.log(`Звоним ${UserName}....${Phone}...Алло бля...`)
+    alert((`Звоним ${UserName}....${Phone}...Алло...`))
   }
   return (
     <div className={css.header}>

@@ -16,7 +16,7 @@ const AddChatComponent = () => {
   const router = useRouter();
 
   const getData = async () => {
-    const response = await Requests.Authentication('/contacts', { 'access_token': checkCookie });
+    const response = await Requests.authenticate('/contacts', { 'access_token': checkCookie });
     setData(response.data);
     return data;
   };

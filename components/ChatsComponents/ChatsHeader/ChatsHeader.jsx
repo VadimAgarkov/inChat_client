@@ -9,12 +9,6 @@ import css from './ChatsHeader.module.css';
 
 const ChatsHeaderComponent = () => {
   const router = useRouter();
-  const Search = () => {
-    console.log('SEARCH BTN');
-  };
-  const AddPhone = () => {
-    console.log('ADD Phone BTN');
-  };
   const AddChat = () => {
     router.push('/chats/add_chat');
   };
@@ -31,7 +25,7 @@ const ChatsHeaderComponent = () => {
         Chats
       </div>
       <div className={css.group_header_right}>
-        <button className={css.option_btn} onClick={Search}>
+        <button className={css.option_btn}>
           <SearchIcon
             width={24}
             height={24}
@@ -39,7 +33,7 @@ const ChatsHeaderComponent = () => {
             className={css.header_icon}
           />
         </button>
-        <button className={css.option_btn} onClick={AddPhone}>
+        <button className={css.option_btn}>
           <AddPhoneIcon
             width={24}
             height={24}

@@ -1,8 +1,8 @@
 import css from './404.module.css'
 import { useRouter } from 'next/router';
 import FooterComponent from '../Footer/Footer.jsx'
-import GoBackIcon from "../icons/GoBack.icon.jsx";
-import LogoIcon from "../icons/Logo.icon";
+import GoBackIcon from '../icons/GoBack.icon.jsx';
+import LogoIcon from '../icons/Logo.icon';
 
 export default function ErrorPageComponent() {
   const router = useRouter();

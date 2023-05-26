@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import css from "./Footer.module.css"
+import css from './Footer.module.css';
 
 const IconFooter = (props) => {
   const { value, icon, url } = props

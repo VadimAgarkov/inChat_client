@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { getCookie } from 'cookies-next';
 import Requests from '../components/services/requests.js'
@@ -11,7 +11,7 @@ export default function Home() {
   const checkCookie = getCookie('access_token');
   const getData = async () => {
     if (checkCookie) {
-      const res = await Requests.Authentication('/auth', { 'access_token': checkCookie })
+      const res = await Requests.authenticate('/auth', { 'access_token': checkCookie })
       if (res.data == 'Not authorized') {
         router.push('/login')
       }

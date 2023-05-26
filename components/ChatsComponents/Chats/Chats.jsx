@@ -13,7 +13,7 @@ const ChatsComponent = () => {
   const [data, setData] = useState([]);
   const checkCookie = getCookie('access_token');
   const getData = async () => {
-    const response = await Request.Authentication('/user/chats', { 'access_token': checkCookie });
+    const response = await Request.authenticate('/user/chats', { 'access_token': checkCookie });
     setData(() => response.data);
   };
 

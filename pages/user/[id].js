@@ -13,7 +13,7 @@ export default function userPage() {
   const { id } = router.query;
   const [data, setData] = useState([]);
   const getData = async (id) => {
-    const response = await Requests.Authentication('/user', { id: Number(id) });
+    const response = await Requests.authenticate('/user', { id: Number(id) });
     setData(response.data);
     return data;
   };

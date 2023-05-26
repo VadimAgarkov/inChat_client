@@ -20,7 +20,7 @@ const RegistrationFormComponent = () => {
       Password: '',
       Password_2: ''
     },
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       if (values.Password == values.Password_2) {
         const response = await axios.post('http://localhost:8081/registration', {
           FullName: values.FullName,

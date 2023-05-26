@@ -10,9 +10,9 @@ const ChatFieldComponent = (props) => {
   // const checkCookie = getCookie("access_token")
   const { id, initiator } = props;
   const getData = async () => {
-    const response = await Request.Authentication('/chats/getChat', {
-      "chat_id": id,
-      "initiator": initiator
+    const response = await Request.authenticate('/chats/getChat', {
+      'chat_id': id,
+      'initiator': initiator
     });
     setData((data) => response.data);
   };

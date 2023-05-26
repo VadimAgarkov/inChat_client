@@ -27,7 +27,7 @@ const EditComponent = () => {
   };
   const Update = async () => {
     const checkCookie = getCookie('access_token');
-    const res = await Requests.Authentication('/user/update', {
+    const res = await Requests.authenticate('/user/update', {
       'access_token': checkCookie,
       'fullName': formik.values.fullName ? formik.values.fullName : null,
       'user_name': formik.values.user_name ? '@' + formik.values.user_name : null,

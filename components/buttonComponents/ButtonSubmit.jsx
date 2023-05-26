@@ -7,6 +7,4 @@ const ButtonSubmit = (props) => {
   );
 }
 
-
-
 export default ButtonSubmit;

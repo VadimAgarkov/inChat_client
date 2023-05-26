@@ -15,7 +15,7 @@ const ContactsComponent = () => {
   const checkCookie = getCookie('access_token');
   const [data, setData] = useState([]);
   const getData = async () => {
-    const response = await Requests.Authentication('/contacts', { 'access_token': checkCookie });
+    const response = await Requests.authenticate('/contacts', { 'access_token': checkCookie });
     setData(response.data);
     console.log('/contacts request:::', response.data);
     return data;
