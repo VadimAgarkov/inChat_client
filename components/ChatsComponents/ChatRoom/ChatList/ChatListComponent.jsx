@@ -37,9 +37,8 @@ const ChatListComponent = () => {
           setMessages((prevMessages) => [...prevMessages, ...newMessages]);
         }
       });
-      console.log('id chats:', id);
     };
-  }
+  };
 
   useEffect(() => {
     getData()
@@ -47,14 +46,11 @@ const ChatListComponent = () => {
     loadMessages(0, 20);
 
     socketRef.current.on('messages', (msg) => {
-      console.log('get mess client by server:::', msg);
       setMessages((messages) => msg);
-      console.log('update msg:', messages);
     });
 
     socketRef.current.on('add message', (data) => {
       setMessages((messages) => [...messages, data.msg]);
-      console.log('Cообщения:::::::::::::', messages);
       return messages
     });
 
@@ -67,7 +63,6 @@ const ChatListComponent = () => {
     let msg = document.getElementById("message");
     if (msg.value) {
       socketRef.current.emit('send message', { chat_id: id, content: msg.value, sender: cookie })
-      console.log('Отправили сообщение:::', msg.value)
       msg.value = ''
     };
   };

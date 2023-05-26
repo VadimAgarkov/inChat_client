@@ -1,36 +1,14 @@
-import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
-import { useEffect, useState, useMemo } from "react";
 import { deleteCookie } from 'cookies-next';
 
 import css from './SettingComponent.module.css';
 
-import FooterComponent from "../../../Footer/Footer.jsx";
+import FooterComponent from '../../../Footer/Footer.jsx';
 
-import Requests from '../../../services/requests';
 import GoBackIcon from '../../../icons/GoBack.icon';
 import LogoutIcon from '../../../icons/Logout.icon';
 
-
-
-
 const SettingsComponent = () => {
-  const checkCookie = getCookie('access_token');
-  const [data, setData] = useState([]);
-
-  // const getData = async () => {
-  //   const response = await Requests.Authentication();
-  //   setData(response.data);
-  //   console.log('/contacts request:::', response.data);
-  //   return data;
-  // // };
-
-  // useEffect(() => {
-  //   getData();
-  // }, []);
-
-
-
   const router = useRouter();
   const GoBack = () => {
     router.back();
@@ -38,7 +16,7 @@ const SettingsComponent = () => {
   const Logout = () => {
     deleteCookie('access_token');
     router.push('/')
-  }
+  };
 
   return (
     <div>
@@ -55,7 +33,6 @@ const SettingsComponent = () => {
         </h1>
         <div></div>
       </div>
-
       <div className={css.settingList}>
         <button className={css.btnGroup} onClick={Logout}>
           <div className={css.group}>

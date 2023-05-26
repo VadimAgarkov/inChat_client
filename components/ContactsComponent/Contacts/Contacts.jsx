@@ -1,11 +1,10 @@
-import Image from 'next/image';
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo } from 'react';
 
 import css from './Contacts.module.css';
 
-import FooterComponent from "../../Footer/Footer.jsx";
+import FooterComponent from '../../Footer/Footer.jsx';
 import ContactField from '../Contact_field/Contact_field.jsx';
 import Requests from '../../services/requests';
 import GoBackIcon from '../../icons/GoBack.icon';
@@ -15,18 +14,15 @@ import SearchIcon from '../../icons/Search.icon';
 const ContactsComponent = () => {
   const checkCookie = getCookie('access_token');
   const [data, setData] = useState([]);
-
   const getData = async () => {
     const response = await Requests.Authentication('/contacts', { 'access_token': checkCookie });
     setData(response.data);
     console.log('/contacts request:::', response.data);
     return data;
   };
- 
   useEffect(() => {
     getData();
   }, []);
-
   const sortedData = data.sort((a, b) => a.fullName.localeCompare(b.fullName));
   const alphabet = [];
   console.log(sortedData);
@@ -36,12 +32,8 @@ const ContactsComponent = () => {
       acc[firstLetter] = [];
     };
     acc[firstLetter].push(cur);
-
     return acc;
   }, {}), [sortedData]);
-
-  console.log(groupedData);
-
   const router = useRouter();
   const GoBack = () => {
     router.back();
@@ -56,13 +48,6 @@ const ContactsComponent = () => {
             height={24}
             color={'#817CFF'}
           />
-          {/* <Image
-            src='/GoBack.icon.svg'
-            alt="Back"
-            width={24}
-            height={24}
-            priority
-          /> */}
         </button>
         <h1>
           Contacts
@@ -73,14 +58,6 @@ const ContactsComponent = () => {
             height={24}
             color={'#817CFF'}
           />
-          {/* <Image
-            src='/Search.icon.svg'
-            alt="Search"
-            // className={css.btn_icon}
-            width={24}
-            height={24}
-            priority
-          /> */}
         </button>
       </div>
       <div className={css.contacts}>
@@ -91,7 +68,7 @@ const ContactsComponent = () => {
             return (
               <div key={letter} className={css.key}>
                 <div className={css.pref}>{letter}</div>
-                <hr className={css.hr}></hr>
+                <hr className={css.hr}/>
                 <div>
                   {items.map((item) => (
                     <ContactField

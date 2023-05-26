@@ -1,19 +1,17 @@
 import Image from 'next/image'
 import { setCookie } from 'cookies-next';
 
-import React, { useEffect } from "react";
+import React from "react";
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import axios from 'axios';
-import InputComponent from "../InputComponent/Input.jsx";
-import ButtonSubmit from "../buttonComponents/ButtonSubmit.jsx";
+import InputComponent from '../InputComponent/Input.jsx';
+import ButtonSubmit from '../buttonComponents/ButtonSubmit.jsx';
 
 import css from './login.module.css'
 
-
 const LoginFormComponent = () => {
   const router = useRouter();
-  // ==================================================
   const formik = useFormik({
     initialValues: {
       Password: '',
@@ -26,18 +24,15 @@ const LoginFormComponent = () => {
           Password: values.Password,
         });
         if (response) {
-          console.log(response.data)
           setCookie("access_token", response.data.access_token)
           setCookie("refresh_token", response.data.refresh_token)
           router.push('/')
         }
       },
-  })
-
+  });
   const SignUp = () => {
     router.push('/registration')
-  }
-  // ====================================================
+  };
 
   return (
     <main className={css.main}>
@@ -51,10 +46,7 @@ const LoginFormComponent = () => {
           priority
         />
       </div>
-
-      
         <form onSubmit={formik.handleSubmit}  className={css.form}>
-
           <InputComponent
             id='Email'
             type='text'
@@ -64,7 +56,6 @@ const LoginFormComponent = () => {
             imageSrc={'Contact.icon.svg'}
             onChange={formik.handleChange}
           />
-
           <InputComponent
             id='Password'
             type='password'
@@ -74,9 +65,7 @@ const LoginFormComponent = () => {
             imageSrc={'key.svg'}
             onChange={formik.handleChange}
           />
-
           <ButtonSubmit type={'submit'} value={'Log in'} />
-
         </form>
         <button className={css.btn} onClick={SignUp}>Sign Up</button>
       <p />
@@ -91,8 +80,6 @@ const LoginFormComponent = () => {
       />
     </main>
   );
-}
-
-
+};
 
 export default LoginFormComponent;

@@ -1,5 +1,4 @@
 const GroupIcon = ({ width, height }) => {
-
   return (
     <svg width={width} height={height} viewBox="0 0 204 44" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="48" height="44" rx="20" fill="#262626" />
@@ -21,6 +20,6 @@ const GroupIcon = ({ width, height }) => {
       </defs>
     </svg>
   );
-}
+};
 
 export default GroupIcon;

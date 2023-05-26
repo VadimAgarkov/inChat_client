@@ -1,5 +1,5 @@
-import Image from 'next/image'
-import css from './ChatHeaderComponent.module.css'
+import Image from 'next/image';
+import css from './ChatHeaderComponent.module.css';
 import { useRouter } from 'next/router';
 import AvatarIcon from '../../../icons/Avatar.icon';
 import GoBackIcon from '../../../icons/GoBack.icon';
@@ -9,12 +9,9 @@ import SearchIcon from '../../../icons/Search.icon';
 const ChatHeaderComponent = (props) => {
   const { Avatar, UserName, State, Phone } = props;
   const router = useRouter();
-
   const GoBack = () => {
-
     router.back()
-  }
-
+  };
   const CheckAvatar = (Avatar) => {
     if (Avatar) {
       <Image
@@ -28,11 +25,9 @@ const ChatHeaderComponent = (props) => {
       return <AvatarIcon width={40} height={40} color={'#817CFF'} />
     }
   };
-
   const Call = () => {
     console.log(`Звоним ${UserName}....${Phone}...Алло бля...`)
   }
-
   return (
     <div className={css.header}>
       <button className={css.btn} onClick={GoBack}>
@@ -49,32 +44,12 @@ const ChatHeaderComponent = (props) => {
       </div>
       <button className={css.btn} onClick={Call}>
         <PhoneIcon width={24} height={24} color={'#817CFF'} />
-        {/* <Image 
-          src='/Phone.icon.svg'
-          alt="Search"
-          width={24}
-          height={24}
-          priority
-        /> */}
       </button>
       <button className={css.btn}>
         <SearchIcon width={24} height={24} color={'#817CFF'} />
-        {/* <Image
-          src='/Options.icon.svg'
-          alt="Search"
-          // className={css.btn_icon}
-          width={24}
-          height={24}
-          priority
-        /> */}
       </button>
     </div>
   );
 };
 
 export default ChatHeaderComponent;
-
-
-
-
-

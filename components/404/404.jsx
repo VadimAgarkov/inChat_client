@@ -1,4 +1,3 @@
-import Image from "next/image"
 import css from './404.module.css'
 import { useRouter } from 'next/router';
 import FooterComponent from '../Footer/Footer.jsx'
@@ -18,10 +17,8 @@ export default function ErrorPageComponent() {
         </button>
       </div>
       <main className={css.main}>
-
         <h1>ERROR 404</h1>
         <LogoIcon width={254} height={91} />
-
         <h2>Page Not Found</h2>
       </main>
       <div>

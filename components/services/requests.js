@@ -1,8 +1,4 @@
-import { getCookie, setCookie, hasCookie, deleteCookie } from 'cookies-next';
 import axios from "axios";
-
-
-
 
 class Requests {
   async Authentication(path, data) {
@@ -11,8 +7,7 @@ class Requests {
       data
     });
     return request
-  }
-}
-
+  };
+};
 
 module.exports = new Requests();

@@ -1,8 +1,7 @@
-import ErrorPageComponent from '../components/404/404.jsx'
+import ErrorPageComponent from '../components/404/404.jsx';
 
-export default function  ErrorPage ()  {
-  
+export default function ErrorPage() {
   return (
-   <ErrorPageComponent/>
-  )
-  }
+    <ErrorPageComponent />
+  );
+};

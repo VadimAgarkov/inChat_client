@@ -1,15 +1,14 @@
-import FooterComponent from "../../Footer/Footer.jsx";
+import FooterComponent from '../../Footer/Footer.jsx';
 import ContactField from '../../ContactsComponent/Contact_field/Contact_field.jsx';
 import Requests from '../../services/requests.js';
-import GoBackIcon from "../../icons/GoBack.icon.jsx";
-import SearchIcon from "../../icons/Search.icon.jsx";
+import GoBackIcon from '../../icons/GoBack.icon.jsx';
+import SearchIcon from '../../icons/Search.icon.jsx';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
 
 import css from './AddChat.module.css';
-
 
 const AddChatComponent = () => {
   const checkCookie = getCookie('access_token');
@@ -17,20 +16,16 @@ const AddChatComponent = () => {
   const router = useRouter();
 
   const getData = async () => {
-    const response = await Requests.Authentication('/contacts', { 'access_token': checkCookie })
+    const response = await Requests.Authentication('/contacts', { 'access_token': checkCookie });
     setData(response.data);
-    console.log('/contacts request');
     return data;
   };
-
   useEffect(() => {
     getData();
   }, []);
-
   const GoBack = () => {
     router.back();
   };
-
   const sortedData = data.sort((a, b) => a.fullName.localeCompare(b.fullName));
   const alphabet = [];
   const groupedData = sortedData.reduce((acc, cur) => {
@@ -56,13 +51,6 @@ const AddChatComponent = () => {
             height={24}
             color={'#817CFF'}
           />
-          {/* <Image
-            src='/GoBack.icon.svg'
-            alt="Back"
-            width={24}
-            height={24}
-            priority
-          /> */}
         </button>
         <h1>New Chat</h1>
         <button className={css.btn}>
@@ -71,13 +59,6 @@ const AddChatComponent = () => {
             height={24}
             color={'#817CFF'}
           />
-          {/* <Image
-            src='/Search.icon.svg'
-            alt="Search"
-            width={24}
-            height={24}
-            priority
-          /> */}
         </button>
       </div>
       <div className={css.contacts}>

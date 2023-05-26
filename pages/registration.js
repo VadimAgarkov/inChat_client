@@ -1,11 +1,9 @@
-import RegistrationFormComponent from "../components/RegistrationComponent/registration.jsx"
-
-
+import RegistrationFormComponent from '../components/RegistrationComponent/registration.jsx'
 
 const RegistrationPage = () => {
   return (
     <RegistrationFormComponent />
-  )
-}
+  );
+};
 
-export default RegistrationPage
+export default RegistrationPage;

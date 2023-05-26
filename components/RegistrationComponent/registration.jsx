@@ -11,8 +11,6 @@ import css from './registration.module.css'
 
 const RegistrationFormComponent = () => {
   const router = useRouter();
-
-  // ==================================================
   const formik = useFormik({
     initialValues: {
       FullName: '',
@@ -23,9 +21,7 @@ const RegistrationFormComponent = () => {
       Password_2: ''
     },
     onSubmit: async values => {
-
       if (values.Password == values.Password_2) {
-
         const response = await axios.post('http://localhost:8081/registration', {
           FullName: values.FullName,
           Phone: values.Phone,
@@ -33,21 +29,14 @@ const RegistrationFormComponent = () => {
           Bithday: values.Bithday,
           Password: values.Password,
         });
-        console.log('values', values)
-
         if (response) {
-          console.log('записываем куки', response.data)
           setCookie("access_token", response.data.access_token)
           setCookie("refresh_token", response.data.refresh_token)
           router.push('/')
         }
-
       } else {
         throw new Error('The password is incorrect');
-      }
-
-      console.log(response);
-
+      };
       if (!JSON.stringify(response)) {
         throw new Error('no response from the server');
       };
@@ -55,11 +44,8 @@ const RegistrationFormComponent = () => {
     },
   });
 
-  // ====================================================
-
   return (
     <main className={css.main}>
-
       <div>
         <Image
           src="/logo.svg"
@@ -69,12 +55,9 @@ const RegistrationFormComponent = () => {
           priority
           className={css.logo}
         />
-        <p />
+        <p/>
         <>Create account</>
       </div>
-
-      
-
         <form onSubmit={formik.handleSubmit} className={css.form}>
           <InputComponent
             id="FullName"
@@ -85,7 +68,6 @@ const RegistrationFormComponent = () => {
             imageSrc={'Contact.icon.svg'}
             onChange={formik.handleChange}
           />
-
           <InputComponent
             id="Phone"
             type='text'
@@ -95,7 +77,6 @@ const RegistrationFormComponent = () => {
             imageSrc={'Phone.icon.svg'}
             onChange={formik.handleChange}
           />
-
           <InputComponent
             id="Email"
             type='text'
@@ -105,7 +86,6 @@ const RegistrationFormComponent = () => {
             imageSrc={'Mail.icon.svg'}
             onChange={formik.handleChange}
           />
-
           <InputComponent
             id="Bithday"
             type='data'
@@ -115,7 +95,6 @@ const RegistrationFormComponent = () => {
             imageSrc={'Bithday.icon.svg'}
             onChange={formik.handleChange}
           />
-
           <InputComponent
             id="Password"
             type='password'
@@ -125,7 +104,6 @@ const RegistrationFormComponent = () => {
             imageSrc={'key.svg'}
             onChange={formik.handleChange}
           />
-
           <InputComponent
             id="Password_2"
             type='password'
@@ -135,13 +113,11 @@ const RegistrationFormComponent = () => {
             imageSrc={'key.svg'}
             onChange={formik.handleChange}
           />
-
           <ButtonSubmit type={'submit'} value={'Sing Up'} />
         </form>
-      
-      <p />
+      <p/>
       <div>or</div>
-      <p />
+      <p/>
       <Image
         src="/Group 303 (1).svg"
         alt="InChat Logo"
@@ -149,9 +125,8 @@ const RegistrationFormComponent = () => {
         height={44}
         priority
       />
-
     </main>
   );
-}
+};
 
 export default RegistrationFormComponent;

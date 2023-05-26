@@ -1,13 +1,9 @@
 import css from './Input.module.css'
 import Image from 'next/image'
 
-
-
-
 const InputComponent = (props) => {
   const { id, type, value, placeholder, formik, imageSrc } = props;
   return (
-
     <div className={css.inputWrapper}>
       <Image
         src={imageSrc}
@@ -23,11 +19,8 @@ const InputComponent = (props) => {
         value={value}
         placeholder={placeholder}
       />
-
     </div>
-  )
-}
-
-
+  );
+};
 
 export default InputComponent;

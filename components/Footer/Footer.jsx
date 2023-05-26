@@ -1,17 +1,16 @@
-import AvatarIcon from "../icons/Avatar.icon";
-import ContactsBtnIcon from "../icons/ContactsBtn.icon";
-import MailIcon from "../icons/Mail.icon";
-import MusicIcon from "../icons/Music.icon";
-import StoriesIcon from "../icons/Stories.icon";
-import css from "./Footer.module.css"
+import AvatarIcon from '../icons/Avatar.icon';
+import ContactsBtnIcon from '../icons/ContactsBtn.icon';
+import MailIcon from '../icons/Mail.icon';
+import MusicIcon from '../icons/Music.icon';
+import StoriesIcon from '../icons/Stories.icon';
+import css from './Footer.module.css';
 
-import IconFooter from "./icon.footer";
+import IconFooter from './icon.footer';
 import { useRouter } from 'next/router';
 
 const footerComponent = () => {
   const router = useRouter();
   return (
-
     <div className={css.footer}>
       <IconFooter
         value={'Contacts'}

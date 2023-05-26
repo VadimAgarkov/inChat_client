@@ -9,9 +9,7 @@ import { getCookie } from 'cookies-next';
 import Requests from '../../services/requests.js'
 
 const EditComponent = () => {
-
   const router = useRouter();
-
   const formik = useFormik({
     initialValues: {
       fullName: '',
@@ -22,22 +20,13 @@ const EditComponent = () => {
       bithday: '',
       city: '',
       work: '',
-
     },
-
   });
-
-  // ====================================================
   const GoBack = () => {
-
     router.back()
-  }
-
+  };
   const Update = async () => {
-
     const checkCookie = getCookie('access_token');
-    console.log('cookie::', checkCookie)
-
     const res = await Requests.Authentication('/user/update', {
       'access_token': checkCookie,
       'fullName': formik.values.fullName ? formik.values.fullName : null,
@@ -57,23 +46,17 @@ const EditComponent = () => {
 
   return (
     <div>
-
       <div className={css.header}>
-
         <button className={css.btn} onClick={GoBack}>
-
           <div className={css.navigation}>
             <Image
               src="/GoBack.icon.svg"
               alt="InChat Logo"
               width={20}
               height={20}
-              // priority
             />
           </div>
-
         </button>
-
         <div className={css.avatar}>
           <Image
             src="/avatar.icon.svg"
@@ -86,9 +69,7 @@ const EditComponent = () => {
           <p />
           <>Change Profile Photo</>
         </div>
-
         <button className={css.btn} onClick={Update}>
-
           <div className={css.navigation}>
             <Image
               src="/CheckMark.icon.svg"
@@ -100,12 +81,8 @@ const EditComponent = () => {
             />
           </div>
         </button>
-
       </div>
-
       <div className={css.container}>
-        {/* ============================================================= */}
-
         <form onSubmit={formik.handleSubmit} className={css.form}>
           <InputComponent
             id="fullName"
@@ -116,7 +93,6 @@ const EditComponent = () => {
             imageSrc={'/Contact.icon.svg'}
             onChange={formik.handleChange}
           />
-
           <InputComponent
             id="user_name"
             type='text'
@@ -126,7 +102,6 @@ const EditComponent = () => {
             imageSrc={'/Contact.icon.svg'}
             onChange={formik.handleChange}
           />
-
           <InputComponent
             id="about_me"
             type='text'
@@ -136,7 +111,6 @@ const EditComponent = () => {
             imageSrc={'/About_me.icon.svg'}
             onChange={formik.handleChange}
           />
-
           <InputComponent
             id="phone"
             type='text'
@@ -146,7 +120,6 @@ const EditComponent = () => {
             imageSrc={'/Phone.icon.svg'}
             onChange={formik.handleChange}
           />
-
           <InputComponent
             id="email"
             type='text'
@@ -156,7 +129,6 @@ const EditComponent = () => {
             imageSrc={'/Mail.icon.svg'}
             onChange={formik.handleChange}
           />
-
           <InputComponent
             id="bithday"
             type='data'
@@ -166,7 +138,6 @@ const EditComponent = () => {
             imageSrc={'/Bithday.icon.svg'}
             onChange={formik.handleChange}
           />
-
           <InputComponent
             id="city"
             type='text'
@@ -176,7 +147,6 @@ const EditComponent = () => {
             imageSrc={'/Sity.icon.svg'}
             onChange={formik.handleChange}
           />
-
           <InputComponent
             id="work"
             type='text'
@@ -186,14 +156,11 @@ const EditComponent = () => {
             imageSrc={'/Work.icon.svg'}
             onChange={formik.handleChange}
           />
-
         </form>
-
       </div>
       <FooterComponent />
-
     </div>
-  )
+  );
 };
 
 export default EditComponent;

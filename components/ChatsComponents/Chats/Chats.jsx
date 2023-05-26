@@ -17,8 +17,6 @@ const ChatsComponent = () => {
     setData(() => response.data);
   };
 
-  console.log('data chats::', data);
-
   useEffect(() => {
     getData();
   }, []);
