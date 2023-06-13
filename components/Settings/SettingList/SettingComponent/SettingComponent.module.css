@@ -37,6 +37,7 @@
 }
 
 .btnGroup{
+  display: flex;
   width: 128px;
   height: 44px;
   color: #817CFF;
@@ -46,4 +47,15 @@
   align-items: center;
   padding: auto;
   margin: 4px;
+}
+
+.group{
+  display: flex;
+  flex-direction: row;
+  margin-inline: auto;
+}
+
+.text{
+  align-self: center;
+  margin: 3px;
 }

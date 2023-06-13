@@ -1,4 +1,0 @@
-Работа с SVG
-
-
-https://react-svgr.com/playground/ ---- конвертация SVG в JSX Component => в fill подставляется значение из пропсов

@@ -7,13 +7,24 @@ import SearchIcon from '../../icons/Search.icon.jsx';
 import { useState, useEffect } from 'react';
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
+import io from 'socket.io-client';
 
 import css from './AddChat.module.css';
 
 const AddChatComponent = () => {
   const checkCookie = getCookie('access_token');
+  const userId = getCookie('inchatId')
   const [data, setData] = useState([]);
   const router = useRouter();
+
+  useEffect(() => {
+    const socket = io.connect("ws://localhost:8081");
+    socket.emit('online', +userId);
+    return () => {
+      socket.emit('offline', +userId)
+      socket.disconnect()
+    }
+  }, [userId])
 
   const getData = async () => {
     const response = await Requests.authenticate('/contacts', { 'access_token': checkCookie });

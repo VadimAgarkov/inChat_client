@@ -6,11 +6,5 @@ export default function App({ Component, pageProps }) {
     <ReduxProvider>
       <Component {...pageProps} />
     </ReduxProvider>
-
   )
 };
-
-
-
-
-

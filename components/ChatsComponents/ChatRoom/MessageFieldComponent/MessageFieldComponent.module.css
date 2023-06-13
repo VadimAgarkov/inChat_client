@@ -39,10 +39,12 @@
 
 .content {
   display: flex;
+  
 }
 
 .date {
   display: flex;
+  min-width: 13%;
   margin-left: 8px;
   opacity: 50%;
 }

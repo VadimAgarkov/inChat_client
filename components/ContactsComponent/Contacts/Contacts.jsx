@@ -1,6 +1,7 @@
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
 import { useEffect, useState, useMemo } from 'react';
+import io from 'socket.io-client';
 
 import css from './Contacts.module.css';
 
@@ -10,22 +11,30 @@ import Requests from '../../services/requests';
 import GoBackIcon from '../../icons/GoBack.icon';
 import SearchIcon from '../../icons/Search.icon';
 
-
 const ContactsComponent = () => {
+
   const checkCookie = getCookie('access_token');
+  const userId = getCookie('inchatId')
   const [data, setData] = useState([]);
   const getData = async () => {
     const response = await Requests.authenticate('/contacts', { 'access_token': checkCookie });
     setData(response.data);
-    console.log('/contacts request:::', response.data);
     return data;
   };
   useEffect(() => {
     getData();
   }, []);
+
+  useEffect(() => {
+    const socket = io.connect("ws://localhost:8081");
+    socket.emit('online', +userId);
+    return () => {
+      socket.emit('offline', +userId)
+      socket.disconnect()
+    }
+  }, [userId])
+
   const sortedData = data.sort((a, b) => a.fullName.localeCompare(b.fullName));
-  const alphabet = [];
-  console.log(sortedData);
   const groupedData = useMemo(() => sortedData.reduce((acc, cur) => {
     const firstLetter = cur.fullName[0].toUpperCase();
     if (!acc[firstLetter]) {
@@ -38,6 +47,13 @@ const ContactsComponent = () => {
   const GoBack = () => {
     router.back();
   };
+
+  /////////////////////
+
+
+
+
+  /////////////////////
 
   return (
     <div>
@@ -63,12 +79,11 @@ const ContactsComponent = () => {
       <div className={css.contacts}>
         <div>
           {Object.keys(groupedData).map((letter) => {
-            console.log('alphabet', alphabet)
             const items = groupedData[letter] || [];
             return (
               <div key={letter} className={css.key}>
                 <div className={css.pref}>{letter}</div>
-                <hr className={css.hr}/>
+                <hr className={css.hr} />
                 <div>
                   {items.map((item) => (
                     <ContactField

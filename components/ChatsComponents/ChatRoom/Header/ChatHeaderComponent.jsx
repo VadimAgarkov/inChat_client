@@ -11,7 +11,7 @@ import SearchIcon from '../../../icons/Search.icon';
 
 
 const ChatHeaderComponent = (props) => {
-  const { Avatar, UserName, State, Phone } = props;
+  const {avatar, fullName, state, phone } = props
   const router = useRouter();
 
   const GoBack = () => { 
@@ -32,7 +32,7 @@ const ChatHeaderComponent = (props) => {
     }
   };
   const Call = () => {
-    alert((`Звоним ${UserName}....${Phone}...Алло...`))
+    alert((`Звоним ${fullName}....${phone}...Алло...`))
   }
   return (
     <div className={css.header}>
@@ -41,11 +41,11 @@ const ChatHeaderComponent = (props) => {
       </button>
       <div className={css.user_info}>
         <button className={css.btn}>
-          {CheckAvatar(Avatar)}
+          {CheckAvatar(avatar)}
         </button>
         <div>
-          <div>{UserName ? UserName : 'Contact'}</div>
-          <div>{State ? State : 'тут будет состояние'}</div>
+          <div>{fullName ? fullName : 'Contact'}</div>
+          <div>{state ? 'Online' : 'Offline'}</div>
         </div>
       </div>
       <button className={css.btn} onClick={Call}>

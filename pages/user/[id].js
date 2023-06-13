@@ -1,31 +1,47 @@
+import io from 'socket.io-client';
+import { getCookie } from 'cookies-next';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
+
 import FooterComponent from '../../components/Footer/Footer.jsx';
 import Header from '../../components/HeadingComponent/Header';
 import Requests from '../../components/services/requests.js';
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import styles from '/styles/Home.module.css';
 import Field from '/components/FieldComponent/Field.jsx';
 import ButtonSubmit from '../../components/buttonComponents/ButtonSubmit.jsx';
+
+import styles from '/styles/Home.module.css';
 
 export default function userPage() {
   const router = useRouter();
   const { id } = router.query;
   const [data, setData] = useState([]);
+  const [showMe, setShowMe] = useState(false);
   const getData = async (id) => {
     const response = await Requests.authenticate('/user', { id: Number(id) });
     setData(response.data);
     return data;
   };
+
+  const userId = getCookie('inchatId')
+  useEffect(() => {
+    const socket = io.connect("ws://localhost:8081");
+    socket.emit('online', +userId);
+    return () => {
+      socket.emit('offline', +userId)
+      socket.disconnect()
+    }
+  }, [userId])
+
   useEffect(() => {
     if (router.isReady) {
       getData(id);
     }
   }, [router.isReady]);
+
   if (data == 'try again') {
     getData(id);
   };
-  const [showMe, setShowMe] = useState(false);
   function toggle() {
     setShowMe(!showMe);
   };

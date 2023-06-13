@@ -1,19 +1,25 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
-import { getCookie } from 'cookies-next';
+import { getCookie, setCookie } from 'cookies-next';
+import { useSelector, useDispatch } from 'react-redux';
+import io from 'socket.io-client';
 
 import FooterComponent from '../../Footer/Footer.jsx';
 import Header from '../../HeadingComponent/Header.jsx';
 import Requests from '../../services/requests.js';
 import Field from '../../FieldComponent/Field.jsx';
 import ButtonSubmit from '../../buttonComponents/ButtonSubmit.jsx';
+import { setUserData } from '../../../Redux/actions/messageActions.js'
+// import Socket from '../../Sockets/Socket.js'
 
 import css from './UserPageComponent.module.css';
 
 export default function UserPageComponent() {
+
   const router = useRouter();
-  const [data, setData] = useState();
+  const data = useSelector((state) => state.userData);
+  const dispatch = useDispatch();
   const getData = async () => {
     const checkCookie = getCookie('access_token');
     if (checkCookie) {
@@ -22,21 +28,34 @@ export default function UserPageComponent() {
         router.push('/login');
       }
       if (res.data) {
-        return setData(res.data);
+        return dispatch(setUserData(res.data)),  setCookie("inchatId", res.data.id)
       }
     } else {
       router.push('/login');
     };
   };
+
+  useEffect(() => {
+    const socket = io.connect("ws://localhost:8081");
+    socket.emit('online', data?.id);
+    return () => {
+      socket.emit('offline', data?.id)
+      socket.disconnect()
+    }
+  }, [data?.id])
+
   useEffect(() => {
     getData()
   }, []);
+
   const [showMe, setShowMe] = useState(false);
   function toggle() {
     setShowMe(!showMe);
   };
+
   const srcImage = showMe ? "/Vector_up.icon.svg" : "/Vector_down.icon.svg"
   const valueBtn = showMe ? "Hide" : "Detalied information"
+
   const EditProfile = () => {
     router.push('/user/edit_profile')
   };

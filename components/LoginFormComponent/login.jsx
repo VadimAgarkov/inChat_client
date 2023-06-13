@@ -23,10 +23,14 @@ const LoginFormComponent = () => {
           Email: values.Email,
           Password: values.Password,
         });
-        if (response) {
+
+        if (response.status == 200) {
           setCookie("access_token", response.data.access_token)
           setCookie("refresh_token", response.data.refresh_token)
           router.push('/')
+        };
+        if (response.status === 304) {
+          console.log('nope')
         }
       },
   });
@@ -46,28 +50,28 @@ const LoginFormComponent = () => {
           priority
         />
       </div>
-        <form onSubmit={formik.handleSubmit}  className={css.form}>
-          <InputComponent
-            id='Email'
-            type='text'
-            value={formik.values.Email}
-            placeholder={'Phone / E-mail'}
-            formik={formik}
-            imageSrc={'Contact.icon.svg'}
-            onChange={formik.handleChange}
-          />
-          <InputComponent
-            id='Password'
-            type='password'
-            value={formik.values.Password}
-            placeholder={'Password'}
-            formik={formik}
-            imageSrc={'key.svg'}
-            onChange={formik.handleChange}
-          />
-          <ButtonSubmit type={'submit'} value={'Log in'} />
-        </form>
-        <button className={css.btn} onClick={SignUp}>Sign Up</button>
+      <form onSubmit={formik.handleSubmit} className={css.form}>
+        <InputComponent
+          id='Email'
+          type='text'
+          value={formik.values.Email}
+          placeholder={'Phone / E-mail'}
+          formik={formik}
+          imageSrc={'Contact.icon.svg'}
+          onChange={formik.handleChange}
+        />
+        <InputComponent
+          id='Password'
+          type='password'
+          value={formik.values.Password}
+          placeholder={'Password'}
+          formik={formik}
+          imageSrc={'key.svg'}
+          onChange={formik.handleChange}
+        />
+        <ButtonSubmit type={'submit'} value={'Log in'} />
+      </form>
+      <button className={css.btn} onClick={SignUp}>Sign Up</button>
       <p />
       <div className={css.or}>or</div>
       <p />

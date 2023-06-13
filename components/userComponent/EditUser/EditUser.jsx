@@ -1,15 +1,23 @@
-import React from "react";
-import FooterComponent from "../../Footer/Footer.jsx"
+import React, { useEffect } from "react";
 import Image from 'next/image'
 import { useFormik } from 'formik';
-import InputComponent from "../../InputComponent/Input.jsx";
-import css from './user.module.css'
 import { useRouter } from 'next/router';
 import { getCookie } from 'cookies-next';
+import { useSelector, useDispatch } from 'react-redux';
+import io from 'socket.io-client';
+
+import css from './user.module.css'
+
+import FooterComponent from "../../Footer/Footer.jsx"
+import InputComponent from "../../InputComponent/Input.jsx";
 import Requests from '../../services/requests.js'
 
 const EditComponent = () => {
+  const userData = useSelector((state) => state.userData);
+  //ебани запрос на бд для подтяжки данных в placeholder
+  const dispatch = useDispatch();
   const router = useRouter();
+  const userId = getCookie('inchatId')
   const formik = useFormik({
     initialValues: {
       fullName: '',
@@ -22,9 +30,20 @@ const EditComponent = () => {
       work: '',
     },
   });
+
+  useEffect(() => {
+    const socket = io.connect("ws://localhost:8081");
+    socket.emit('online', +userId);
+    return () => {
+      socket.emit('offline', +userId)
+      socket.disconnect()
+    }
+  }, [userId])
+
   const GoBack = () => {
     router.back()
   };
+
   const Update = async () => {
     const checkCookie = getCookie('access_token');
     const res = await Requests.authenticate('/user/update', {
@@ -88,7 +107,7 @@ const EditComponent = () => {
             id="fullName"
             type='text'
             value={formik.values.fullName}
-            placeholder={'FullName'}
+            placeholder={userData.fullName ? userData.fullName : 'FullName'}
             formik={formik}
             imageSrc={'/Contact.icon.svg'}
             onChange={formik.handleChange}
@@ -97,7 +116,7 @@ const EditComponent = () => {
             id="user_name"
             type='text'
             value={formik.values.user_name}
-            placeholder={'Username'}
+            placeholder={userData.user_name ? userData.user_name : 'Username'}
             formik={formik}
             imageSrc={'/Contact.icon.svg'}
             onChange={formik.handleChange}
@@ -106,7 +125,7 @@ const EditComponent = () => {
             id="about_me"
             type='text'
             value={formik.values.about_me}
-            placeholder={'AboutMe'}
+            placeholder={userData.about_me ? userData.about_me : 'AboutMe'}
             formik={formik}
             imageSrc={'/About_me.icon.svg'}
             onChange={formik.handleChange}
@@ -115,7 +134,7 @@ const EditComponent = () => {
             id="phone"
             type='text'
             value={formik.values.phone}
-            placeholder={"Phone"}
+            placeholder={userData.phone ? userData.phone : "Phone"}
             formik={formik}
             imageSrc={'/Phone.icon.svg'}
             onChange={formik.handleChange}
@@ -124,7 +143,7 @@ const EditComponent = () => {
             id="email"
             type='text'
             value={formik.values.email}
-            placeholder={"E-mail"}
+            placeholder={userData.email ? userData.email : "E-mail"}
             formik={formik}
             imageSrc={'/Mail.icon.svg'}
             onChange={formik.handleChange}
@@ -133,7 +152,7 @@ const EditComponent = () => {
             id="bithday"
             type='data'
             value={formik.values.bithday}
-            placeholder={"Bithday"}
+            placeholder={userData.bithday ? userData.bithday : "Bithday"}
             formik={formik}
             imageSrc={'/Bithday.icon.svg'}
             onChange={formik.handleChange}
@@ -142,7 +161,7 @@ const EditComponent = () => {
             id="city"
             type='text'
             value={formik.values.city}
-            placeholder={"City"}
+            placeholder={userData.city ? userData.city : "City"}
             formik={formik}
             imageSrc={'/Sity.icon.svg'}
             onChange={formik.handleChange}
@@ -151,7 +170,7 @@ const EditComponent = () => {
             id="work"
             type='text'
             value={formik.values.work}
-            placeholder={"Work"}
+            placeholder={userData.work ? userData.work : "Work"}
             formik={formik}
             imageSrc={'/Work.icon.svg'}
             onChange={formik.handleChange}

@@ -2,6 +2,7 @@ const initialState = {
   messages: [],
   topHasMore: true,
   bottomHasMore: true,
+  userData: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -27,15 +28,18 @@ const reducer = (state = initialState, action) => {
         topHasMore: action.payload,
       };
     case 'BOTTOM_HAS_MORE':
-      console.log('Reduser => SetBottomHasMore:', action.payload)
       return {
         ...state,
         bottomHasMore: action.payload,
       };
+    case 'USER_DATA':
+      return {
+        ...state,
+        userData: action.payload,
+      };
     default:
       return state;
   }
-
 };
 
 export default reducer;

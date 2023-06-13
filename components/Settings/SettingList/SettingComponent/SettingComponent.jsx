@@ -1,5 +1,8 @@
 import { useRouter } from 'next/router';
 import { deleteCookie } from 'cookies-next';
+import { getCookie } from 'cookies-next';
+import io from 'socket.io-client';
+import { useEffect } from 'react';
 
 import css from './SettingComponent.module.css';
 
@@ -9,6 +12,7 @@ import GoBackIcon from '../../../icons/GoBack.icon';
 import LogoutIcon from '../../../icons/Logout.icon';
 
 const SettingsComponent = () => {
+  const userId = getCookie('inchatId')
   const router = useRouter();
   const GoBack = () => {
     router.back();
@@ -17,6 +21,15 @@ const SettingsComponent = () => {
     deleteCookie('access_token');
     router.push('/')
   };
+
+  useEffect(() => {
+    const socket = io.connect("ws://localhost:8081");
+    socket.emit('online', +userId);
+    return () => {
+      socket.emit('offline', +userId);
+      socket.disconnect();
+    }
+  }, [userId]);
 
   return (
     <div>
@@ -41,7 +54,7 @@ const SettingsComponent = () => {
               height={20}
               color={'#817CFF'}
             />
-            <>Выйти</>
+            <div className={css.text}>Выйти</div>
           </div>
         </button>
       </div>

@@ -22,3 +22,8 @@ export const setBottomHasMore = (bottomHasMore) => ({
   type: 'BOTTOM_HAS_MORE',
   payload: bottomHasMore,
 });
+
+export const setUserData = (userData) => ({
+  type: 'USER_DATA',
+  payload: userData,
+});
