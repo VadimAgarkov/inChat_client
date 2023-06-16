@@ -114,6 +114,26 @@
   height: auto;
 }
 
+.right_not_visible{
+  display: flex;
+  flex-direction: row;
+  box-sizing: content-box;
+  align-items: center;
+  background-color: #1a1a1a00;
+  color: #ffffff00;
+  max-width: 85%;
+  margin: 4px;
+  margin-left: 10px;
+  margin-right: auto;
+  text-align: left;
+  padding: 8px;
+  border-radius: 10px;
+  align-self: flex-end;
+  z-index: 0;
+  word-break: break-all;
+  height: auto;
+}
+
 .left{
   display: flex;
   flex-direction: row;
@@ -121,6 +141,26 @@
   align-items: center;
   background-color: #817CFF;
   color: #000000;
+  max-width: 85%;
+  margin: 4px;
+  margin-right: 10px;
+  margin-left: auto;
+  text-align: right;
+  padding: 8px;
+  border-radius: 10px;
+  align-self: flex-start;
+  z-index: 0;
+  word-break: break-all;
+  height: auto;
+}
+
+.left_not_visible{
+  display: flex;
+  flex-direction: row;
+  box-sizing: content-box ;
+  align-items: center;
+  background-color: #807cff00;
+  color: #00000000;
   max-width: 85%;
   margin: 4px;
   margin-right: 10px;
@@ -156,3 +196,16 @@
   align-self: center;
   width: auto;
 }; 
+
+.preloader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.899); /* Прозрачный фон */
+  z-index: 9999; /* Повышаем z-index, чтобы прелоадер отображался поверх списка сообщений */
+}

@@ -13,6 +13,8 @@ import { useState, useRef, useEffect} from 'react';
 import { useRouter } from 'next/router';
 import { getCookie } from 'cookies-next';
 import { useSelector, useDispatch } from 'react-redux';
+import { FixedSizeList } from 'react-window';
+import AutoSizer from 'react-virtualized-auto-sizer';
 
 const ChatListComponent = () => {
   const router = useRouter();
@@ -63,8 +65,6 @@ const ChatListComponent = () => {
       const count = 20;
       // Загружаем следующие сообщения с сервера
       socketRef?.current?.emit('loadMoreNextMessages', { id }, lastId, count, idSocket)
-    } else {
-      return BottomHasMore
     }
   };
 
@@ -74,10 +74,9 @@ const ChatListComponent = () => {
       const count = 20;
       // Загружаем предыдущие сообщения с сервера
       socketRef?.current.emit('loadMorePreviousMessages', { id }, firstMessage, count, idSocket)
-    } else {
-      return TopHasMore
     }
   };
+
 
   const handleScroll = () => {
     const container = containerRef?.current;
@@ -125,7 +124,6 @@ const ChatListComponent = () => {
         dispatch(setTopHasMore(TopHasMore));
       };
     });
-
     const container = containerRef?.current;
     container.addEventListener('scroll', handleScroll);
     //unmounting => 
@@ -146,7 +144,6 @@ const ChatListComponent = () => {
       setSendMess([...sendMess, 1])
     });
     checkMessages()
-    
   }, [messages]);
 
   useEffect(() => {
@@ -185,53 +182,59 @@ const ChatListComponent = () => {
     e.key === 'Enter' ? handleSendMessage() : null
   }
 
-  useEffect(()=>{
-    listRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
-  }, [messagesForRender])
 
+  const MessageRenderer = ({ data, index, style }) => {
+    const msg = data[index];
+    const currentDate = new Date(msg.date);
+    const options = { day: 'numeric', month: 'long' };
+    const formattedDate = new Intl.DateTimeFormat('ru-RU', options).format(currentDate);
+    const prevMessage = data[index - 1];
+    const prevDate = prevMessage && new Date(prevMessage.date);
+  
+    return (
+      <div style={{ ...style, minHeight: 40 }} >
+        {currentDate.getMonth() !== prevDate?.getMonth() && (
+          <div className={css.date}>
+            <div className={css.line} />
+            <div className={css.value}>{formattedDate}</div>
+            <div className={css.line} />
+          </div>
+        )}
+        <MessageField
+          message={msg}
+          key={msg.id}
+          CN={msg.sender === +userId ? css.left : css.right}
+        />
+      </div>
+    );
+  };
+ 
   return (
     <div className={css.container}>
       <div className={css.header}>
-        <ChatHeaderComponent avatar={discriber?.avatar || null} fullName={discriber?.fullName} state={discriber?.online} phone={discriber?.phone} />
+      <ChatHeaderComponent avatar={discriber?.avatar || null} fullName={discriber?.fullName} state={discriber?.online} phone={discriber?.phone} />
       </div>
-      <div
-        className={css.list}
-        onScroll={handleScroll}
-        ref={containerRef}
-        > 
-        <div className={css.scrollList}>
-          {messagesForRender.map((msg, index) => {
-            const currentDate = new Date(msg.date);
-            const options = { day: 'numeric', month: 'long' };
-            const formattedDate = new Intl.DateTimeFormat('ru-RU', options).format(
-              currentDate
-            );
-            const prevMessage = messagesForRender[index - 1];
-            const prevDate =
-              prevMessage && new Date(prevMessage.date);
-            return (
-              <>
-                {currentDate.getMonth() !== prevDate?.getMonth() && (
-                  <div className={css.date} key={index}>
-                    <div className={css.line} />
-                    <div className={css.value}>{formattedDate}</div>
-                    <div className={css.line} />
-                  </div>
-                )}
-                <MessageField
-                  message={msg}
-                  key={msg.key}
-                  CN={msg.sender === +userId ? css.left : css.right}
-                  ref={index === messagesForRender.length - 1 ? listRef : null}
-                />
-              </>
-            );
-          })}
-          <div ref={listRef} />
-        </div>
+      <div 
+      className={css.list}
+      onScroll={handleScroll}
+      ref={containerRef}
+      >
+        <AutoSizer className={css.scrollList}>
+          {({ height, width }) => (
+            <FixedSizeList
+              height={height}
+              width={width}
+              itemCount={messagesForRender.length}
+              itemSize={40} // Минимальная высота каждого элемента сообщения (40px)
+              itemData={messagesForRender}
+            >
+              {MessageRenderer}
+            </FixedSizeList>
+          )}
+        </AutoSizer>
       </div>
       <div className={css.sendField}>
-        <div className={css.inputWrapper}>
+      <div className={css.inputWrapper}>
           <EmojiIcon
             width={20}
             height={20}
